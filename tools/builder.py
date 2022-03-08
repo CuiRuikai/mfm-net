@@ -57,12 +57,6 @@ def build_opti_sche(params, config, opt_type):
     else:
         raise NotImplementedError()
 
-    if config.get('bnmscheduler') is not None:
-        bnsche_config = config.bnmscheduler
-        if bnsche_config.type == 'Lambda':
-            bnscheduler = build_lambda_bnsche(base_model, bnsche_config.kwargs)  # misc.py
-        scheduler = [scheduler, bnscheduler]
-
     return optimizer, scheduler
 
 def resume_model(base_model, args, logger = None):

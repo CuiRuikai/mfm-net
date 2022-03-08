@@ -13,5 +13,6 @@ bash ./scripts/test.sh 0 --ckpts ./experiments/PM/EPN3D_models/pm_only_watercraf
 ---
 Partial Matching
 nohup bash ./scripts/train.sh 0 --config ./cfgs/EPN3D_models/MFM.yaml --exp_name baseline &
+nohup bash ./scripts/train.sh 0 --config ./cfgs/EPN3D_models/MFM.yaml --exp_name mfm &
 
 '''

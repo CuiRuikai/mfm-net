@@ -117,8 +117,8 @@ class FoldingDecoder(nn.Module):
             nn.ReLU(inplace=True),
             nn.Conv1d(512,3,1)
         )
-        a = torch.linspace(-0.05, 0.05, steps=grid_size, dtype=torch.float).view(1, grid_size).expand(grid_size, grid_size).reshape(1, -1).cuda()
-        b = torch.linspace(-0.05, 0.05, steps=grid_size, dtype=torch.float).view(grid_size, 1).expand(grid_size, grid_size).reshape(1, -1).cuda()
+        a = torch.linspace(-0.5, 0.5, steps=grid_size, dtype=torch.float).view(1, grid_size).expand(grid_size, grid_size).reshape(1, -1).cuda()
+        b = torch.linspace(-0.5, 0.5, steps=grid_size, dtype=torch.float).view(grid_size, 1).expand(grid_size, grid_size).reshape(1, -1).cuda()
         self.folding_seed = torch.cat([a, b], dim=0).view(1, 2, grid_size ** 2) # 1 2 S
         # self.final_conv = nn.Sequential(
         #     nn.Linear(self.latent_size,1024),
@@ -244,7 +244,7 @@ class MFM(nn.Module):
         k = len(x_logits)
         matching_loss = 0
         for i in range(k):
-            matching_loss += self.bce_criterion(x_logits[i], torch.zeros(bs, 1).to(x_logits[i]))
+            matching_loss += self.bce_criterion(x_logits[i], torch.ones(bs, 1).to(x_logits[i]))
         matching_loss = matching_loss / k
         loss_gen = recon_loss + com_loss + matching_loss
         return loss_gen, recon_loss, com_loss, matching_loss
